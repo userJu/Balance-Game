@@ -1,4 +1,5 @@
 export const colors = {
+  gray0: "#F4F4F2",
   gray10: "#E8E8E8",
   gray20: "#D9D9D9",
   gray30: "#b0b8c1",
