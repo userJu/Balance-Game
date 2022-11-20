@@ -8,3 +8,12 @@ export const colors = {
   white: "#ffffff",
   black: "#1E1E1E",
 };
+
+export const fonts = {
+  font14: "14px",
+  font16: "16px",
+  font18: "18px",
+  font20: "20px",
+  font22: "22px",
+  font24: "24px",
+};
