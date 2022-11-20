@@ -1,5 +1,6 @@
 import Button from "./components/Button";
 import Container from "./components/Container";
+import GameCard from "./components/GameCard";
 import Input from "./components/Input";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Input onChange={onInputChange} />
       <Container>
         <div>hello i'm container</div>
+        <GameCard></GameCard>
       </Container>
     </div>
   );

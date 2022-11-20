@@ -8,6 +8,8 @@ export const colors = {
   gray60: "#333d4b",
   white: "#ffffff",
   black: "#1E1E1E",
+
+  gray40Opacity30: `rgba(107, 118, 132, 0.3)`,
 };
 
 export const fonts = {
