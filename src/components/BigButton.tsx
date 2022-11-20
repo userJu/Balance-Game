@@ -88,7 +88,7 @@ const ButtonContainer = styled.button`
 
 type Props = PropsWithChildren<{}>;
 
-const Button = (props: Props) => {
+const BigButton = (props: Props) => {
   const { children } = props;
   return (
     <ButtonContainer>
@@ -97,4 +97,4 @@ const Button = (props: Props) => {
   );
 };
 
-export default Button;
+export default BigButton;
