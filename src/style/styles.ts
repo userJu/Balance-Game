@@ -20,3 +20,9 @@ export const fonts = {
   font22: "22px",
   font24: "24px",
 };
+
+export const imageSize = {
+  smallImage: "20px",
+  mediumImage: "30px",
+  bigImage: "37px",
+};
