@@ -7,7 +7,7 @@ const Img = styled.image``;
 type Props = PropsWithChildren<{}>;
 
 const Image = (props: Props) => {
-  return <Img src="" alt="" props={ImageSize} />;
+  return;
 };
 
 export default Image;
