@@ -1,5 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Game } from "../entities/game";
+import { PLAYING_GAME_PAGE } from "../router/routePath";
 import { colors } from "../style/styles";
 
 const Container = styled.div`
@@ -32,15 +35,30 @@ const State = styled.div`
   justify-content: space-around;
 `;
 
-const GameCard = () => {
+interface GameCardProps {
+  game: Game;
+}
+
+const GameCard = ({ game }: GameCardProps) => {
+  const navigate = useNavigate();
+  console.log(game);
+  const { gameId, title, owner, topic, max_members, createDate } = game;
+
+  console.log(title, topic, max_members);
+  const interGame = () => {
+    navigate(PLAYING_GAME_PAGE);
+    return;
+  };
   return (
-    <Container>
-      <GameTag>💕</GameTag>
+    <Container onClick={interGame}>
+      {topic.map((item) => (
+        <GameTag key={item}>{item}</GameTag>
+      ))}
       <GameInfo>
-        <Title>새빛초 3학년 1반 모여라</Title>
+        <Title>{title}</Title>
         <State>
           <p>waiting</p>
-          <p>5/8</p>
+          <p>{max_members}</p>
         </State>
       </GameInfo>
     </Container>
