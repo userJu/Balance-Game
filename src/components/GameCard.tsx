@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Game } from "../entities/game";
+import { PLAYING_GAME_PAGE } from "../router/routePath";
 import { colors } from "../style/styles";
 
 const Container = styled.div`
@@ -32,7 +34,21 @@ const State = styled.div`
   justify-content: space-around;
 `;
 
-const GameCard = () => {
+interface GameCardProps {
+  game: Game;
+}
+
+const GameCard = ({ game }: GameCardProps) => {
+  const navigate = useNavigate();
+  console.log(game);
+  const { gameId, title, owner, topic, max_members, members, createDate } =
+    game;
+
+  console.log(title, topic);
+  const interGame = () => {
+    navigate(WAIT_GAME_PAGE, { state: { gameInfo: game } });
+    return;
+  };
   return (
     <Container>
       <GameTag>💕</GameTag>
