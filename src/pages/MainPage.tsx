@@ -22,7 +22,7 @@ const MainPage = () => {
       {/* 랭킹이 없을때는 일단 공란으로 내비두기  */}
       <ul>
         {rankingList.map((rank) => (
-          <li key={rank.userId}>rank.userId</li>
+          <li key={rank.userId}>{rank.userId}</li>
         ))}
       </ul>
     </div>
