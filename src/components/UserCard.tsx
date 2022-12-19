@@ -5,8 +5,9 @@ import { colors } from "../style/styles";
 
 const UserCardContainer = styled.div`
   border: 1px solid gray;
-  width: 20%;
+  width: 90%;
   height: 45%;
+  margin: auto;
   text-align: center;
 `;
 
