@@ -1,6 +1,5 @@
 import { Game } from "../../entities/game";
-import { gamers } from "./gamer";
-
+import { gamers } from "./gamers";
 
 export const gameList: Game[] = [
   {
