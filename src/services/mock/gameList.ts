@@ -1,4 +1,6 @@
 import { Game } from "../../entities/game";
+import { gamers } from "./gamer";
+
 
 export const gameList: Game[] = [
   {
@@ -7,6 +9,7 @@ export const gameList: Game[] = [
     owner: "캐슈",
     topic: [3, 4],
     max_members: 8,
+    members: gamers,
     createDate: new Date(),
   },
   {
@@ -15,6 +18,7 @@ export const gameList: Game[] = [
     owner: "캐슈2",
     topic: [3, 5],
     max_members: 5,
+    members: gamers,
     createDate: new Date(),
   },
 ];

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Game } from "../entities/game";
-import { PLAYING_GAME_PAGE } from "../router/routePath";
+import { PLAYING_GAME_PAGE, WAIT_GAME_PAGE } from "../router/routePath";
 import { colors } from "../style/styles";
 
 const Container = styled.div`
@@ -42,11 +42,12 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
   const navigate = useNavigate();
   console.log(game);
-  const { gameId, title, owner, topic, max_members, createDate } = game;
+  const { gameId, title, owner, topic, max_members, members, createDate } =
+    game;
 
-  console.log(title, topic, max_members);
+  console.log(title, topic);
   const interGame = () => {
-    navigate(PLAYING_GAME_PAGE);
+    navigate(WAIT_GAME_PAGE, { state: { gameInfo: game } });
     return;
   };
   return (

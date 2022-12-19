@@ -15,12 +15,29 @@ const InputComponent = styled.input`
 `;
 
 interface InputProps {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputId: string;
+  labelName: string;
+  placeholder: string;
+  value: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = (props: InputProps) => {
-  const { onChange } = props;
-  return <InputComponent onChange={onChange} />;
+const Input = ({
+  inputId,
+  labelName,
+  placeholder,
+  value,
+  handleChange,
+}: InputProps) => {
+  return (
+    <InputComponent
+      type="text"
+      id={inputId}
+      placeholder={placeholder}
+      value={value}
+      onChange={handleChange}
+    />
+  );
 };
 
 export default Input;
