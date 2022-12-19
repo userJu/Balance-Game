@@ -3,28 +3,26 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Game } from "../entities/game";
 import { PLAYING_GAME_PAGE, WAIT_GAME_PAGE } from "../router/routePath";
+import { topics } from "../services/mock/topics";
 import { colors } from "../style/styles";
 
 const Container = styled.div`
   background-color: ${colors.gray20};
-  width: 45%;
-  display: flex;
+  margin-left: 5px;
+  margin-right: 5px;
+
   p {
     margin: 0;
   }
 `;
 
-const GameInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const GameInfo = styled.div``;
 
-const GameTag = styled.div`
+const GameTag = styled.span`
   background-color: ${colors.gray30};
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
+  border: 1px solid gray;
+  margin-right: 3px;
+  font-size: 12px;
 `;
 const Title = styled.p`
   background-color: ${colors.gray30};
@@ -41,21 +39,21 @@ interface GameCardProps {
 
 const GameCard = ({ game }: GameCardProps) => {
   const navigate = useNavigate();
-  console.log(game);
   const { gameId, title, owner, topic, max_members, members, createDate } =
     game;
 
-  console.log(title, topic);
+  console.log(topics[3]);
   const interGame = () => {
     navigate(WAIT_GAME_PAGE, { state: { gameInfo: game } });
     return;
   };
   return (
     <Container onClick={interGame}>
-      {topic.map((item) => (
-        <GameTag key={item}>{item}</GameTag>
-      ))}
+      <div>💛</div>
       <GameInfo>
+        {topic.map((item) => (
+          <GameTag key={item}>{topics[item].title}</GameTag>
+        ))}
         <Title>{title}</Title>
         <State>
           <p>waiting</p>
