@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Game } from "../entities/game";
 import { PLAYING_GAME_PAGE } from "../router/routePath";
@@ -50,13 +51,15 @@ const GameCard = ({ game }: GameCardProps) => {
     return;
   };
   return (
-    <Container>
-      <GameTag>💕</GameTag>
+    <Container onClick={interGame}>
+      {topic.map((item) => (
+        <GameTag key={item}>{item}</GameTag>
+      ))}
       <GameInfo>
-        <Title>새빛초 3학년 1반 모여라</Title>
+        <Title>{title}</Title>
         <State>
           <p>waiting</p>
-          <p>5/8</p>
+          <p>{max_members}</p>
         </State>
       </GameInfo>
     </Container>
