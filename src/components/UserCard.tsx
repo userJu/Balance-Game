@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Gamer } from "../entities/gamer";
 import { colors } from "../style/styles";
 
 const UserCardContainer = styled.div`
@@ -23,13 +24,21 @@ const UserName = styled.p`
   background-color: ${colors.gray30};
 `;
 
-const UserCard = () => {
+interface UserCardProps {
+  gamer: Gamer;
+}
+
+const UserCard = ({ gamer }: UserCardProps) => {
+  console.log(gamer);
+  const { id, profileName, profileImage, level } = gamer;
   return (
     <UserCardContainer>
       <ImageCover>
-        <Image src="" alt="" />
+        <Image src={profileImage} alt="" />
       </ImageCover>
-      <UserName>귀여운 야옹이</UserName>
+      <UserName>
+        LV.{level} {profileName}
+      </UserName>
     </UserCardContainer>
   );
 };

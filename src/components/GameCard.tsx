@@ -42,11 +42,12 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
   const navigate = useNavigate();
   console.log(game);
-  const { gameId, title, owner, topic, max_members, createDate } = game;
+  const { gameId, title, owner, topic, max_members, members, createDate } =
+    game;
 
-  console.log(title, topic, max_members);
+  console.log(title, topic);
   const interGame = () => {
-    navigate(PLAYING_GAME_PAGE);
+    navigate(WAIT_GAME_PAGE, { state: { gameInfo: game } });
     return;
   };
   return (
