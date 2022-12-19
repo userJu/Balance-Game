@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Game } from "../entities/game";
-import { PLAYING_GAME_PAGE } from "../router/routePath";
+import { PLAYING_GAME_PAGE, WAIT_GAME_PAGE } from "../router/routePath";
 import { colors } from "../style/styles";
 
 const Container = styled.div`
