@@ -1,3 +1,4 @@
+
 import { Gamer } from "./gamer";
 
 export interface Game {
@@ -6,6 +7,8 @@ export interface Game {
   owner: string;
   topic: number[];
   max_members: number;
+
   members: Gamer[];
+
   createDate: Date;
 }
