@@ -6,7 +6,7 @@ const UserInfo = () => {
   return (
     <div>
       <h3>user 정보</h3>
-      <UserCard gamer={gamer}></UserCard>
+      <UserCard {...gamer}></UserCard>
     </div>
   );
 };
