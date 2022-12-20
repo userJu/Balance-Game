@@ -6,13 +6,13 @@ import { colors } from "../style/styles";
 const UserCardContainer = styled.div`
   border: 1px solid gray;
   width: 90%;
-  height: 45%;
+  height: 90%;
   margin: auto;
   text-align: center;
 `;
 
 const ImageCover = styled.div`
-  width: 90px;
+  width: 80%;
   height: 90px;
   margin: auto;
   background-color: ${colors.gray20};
@@ -29,17 +29,19 @@ interface UserCardProps {
   gamer: Gamer;
 }
 
-const UserCard = ({ gamer }: UserCardProps) => {
-  console.log(gamer);
-  const { id, profileName, profileImage, level } = gamer;
+const UserCard = ({
+  id = "",
+  profileName = "",
+  profileImage = "",
+  level = "",
+}: Gamer) => {
+  // const { id, profileName, profileImage, level } = gamer;
   return (
     <UserCardContainer>
       <ImageCover>
         <Image src={profileImage} alt="" />
       </ImageCover>
-      <UserName>
-        LV.{level} {profileName}
-      </UserName>
+      <UserName>{level ? `LV.${level} ${profileName}` : "x"}</UserName>
     </UserCardContainer>
   );
 };
