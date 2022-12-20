@@ -6,6 +6,13 @@ import UserCard from "../../components/UserCard";
 import Input from "../../components/Input";
 import UseInput from "../../hooks/UseInput";
 import Form from "./components/Form";
+import UserGrid from "./components/UserGrid";
+import Container from "../../components/Container";
+import styled from "styled-components";
+
+const PageContainer = styled.div`
+  display: flex;
+`;
 
 const WaitGamePage = () => {
   const location = useLocation();
@@ -14,9 +21,6 @@ const WaitGamePage = () => {
 
   const chatInput = UseInput("");
   const suggestInput = UseInput("");
-
-  // const { value, onChange, resetValue } = chatInput;
-  // const { value, onChange, resetValue } = suggestInput;
 
   const chatInputProps = {
     inputId: "chat",
@@ -34,31 +38,43 @@ const WaitGamePage = () => {
     handleChange: suggestInput.onChange,
   };
 
+  const submitChat = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(chatInput.value);
+  };
+  const submitSuggests = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   return (
     <div>
       <h1>WaitGamePage</h1>
-      <div>
-        <h2>{title}</h2>
-        <ul>
-          {members.map((gamer: Gamer) => (
-            // <li>{gamer.profileName}</li>
-            <UserCard gamer={gamer}></UserCard>
-          ))}
-        </ul>
-      </div>
-      <Form>
-        <Input {...chatInputProps}></Input>
-      </Form>
-
-      <div>
-        <h2>오른쪽</h2>
-        <div>
-          <Form>
-            <Input {...suggestInputProps}></Input>
+      <PageContainer>
+        <Container basis={"65%"}>
+          <div>
+            <h3>{title}</h3>
+            <UserGrid members={members}></UserGrid>
+          </div>
+          <Form handleFormSubmit={submitChat}>
+            <Input {...chatInputProps}></Input>
           </Form>
-        </div>
-        <BigButton>준비하기</BigButton>
-      </div>
+        </Container>
+
+        <Container basis={"35%"}>
+          <h3>제안하기</h3>
+          <div>
+            <Form handleFormSubmit={submitSuggests}>
+              <input type="checkbox" name="사랑" id="사랑" />
+              <label htmlFor="사랑">사랑</label>
+              <input type="checkbox" name="동물" id="동물" />
+              <label htmlFor="동물">동물</label>
+              <input type="checkbox" name="과자" id="과자" />
+              <label htmlFor="과자">과자</label>
+              <Input {...suggestInputProps}></Input>
+            </Form>
+          </div>
+          <BigButton>준비하기</BigButton>
+        </Container>
+      </PageContainer>
     </div>
   );
 };

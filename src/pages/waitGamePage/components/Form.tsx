@@ -1,10 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-const Form = (props: React.PropsWithChildren) => {
+interface FormProps {
+  children: ReactNode;
+  handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const Form = ({ children, handleFormSubmit }: FormProps) => {
   return (
-    <form action="submit">
+    <form action="submit" onSubmit={handleFormSubmit}>
       <label htmlFor=""></label>
-      {props.children}
+      {children}
       <button>전송</button>
     </form>
   );
