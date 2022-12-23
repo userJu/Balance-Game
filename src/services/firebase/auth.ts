@@ -1,15 +1,23 @@
 import {
+  browserSessionPersistence,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  setPersistence,
   signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  User,
 } from "firebase/auth";
 import { auth } from "./initializer";
 interface AuthType {
+  displayName?: string;
   email: string;
   password: string;
 }
 
-export const signup = ({ email, password }: AuthType) => {
-  // const auth = getAuth();
+export const signup = ({ email, password, displayName }: AuthType) => {
+  setPersistence(auth, browserSessionPersistence);
+
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -26,6 +34,8 @@ export const signup = ({ email, password }: AuthType) => {
 };
 
 export const login = ({ email, password }: AuthType) => {
+  setPersistence(auth, browserSessionPersistence);
+
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
