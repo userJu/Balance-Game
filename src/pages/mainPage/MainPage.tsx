@@ -29,6 +29,10 @@ const MainPage = () => {
     setUser(newGamer);
   };
 
+  const setUserLogout = () => {
+    setUser((prev) => null);
+  };
+
   useEffect(() => {
     checkAuthState(getUserInfo);
   }, []);
@@ -38,7 +42,11 @@ const MainPage = () => {
       <h1>Balance</h1>
       <PageContainer>
         <Container basis={"15%"}>
-          {user !== null ? <UserInfo></UserInfo> : <Auth></Auth>}
+          {user !== null ? (
+            <UserInfo setUserLogout={setUserLogout}></UserInfo>
+          ) : (
+            <Auth></Auth>
+          )}
         </Container>
 
         <Container basis={"70%"}>
