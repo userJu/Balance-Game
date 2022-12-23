@@ -87,3 +87,13 @@ export const checkAuthState = (getUserInfo: (user: User) => void) => {
     }
   });
 };
+
+export const logout = () => {
+  signOut(auth)
+    .then(() => {
+      console.log("succesfully logout");
+    })
+    .catch((error) => {
+      console.log("로그아웃에 실패했습니다");
+    });
+};
