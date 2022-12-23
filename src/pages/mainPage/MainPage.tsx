@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { User } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Container from "../../components/Container";
 import { Gamer } from "../../entities/gamer";
+import { checkAuthState } from "../../services/firebase/auth";
 import Auth from "./components/Auth";
 import GameListGrid from "./components/GameListGrid";
 import Lanking from "./components/Lanking";
@@ -15,6 +17,21 @@ const PageContainer = styled.div`
 
 const MainPage = () => {
   const [user, setUser] = useState<null | Gamer>(null);
+
+  const getUserInfo = (user: User) => {
+    const { email, displayName, photoURL } = user;
+    const newGamer = {
+      id: email || "",
+      profileName: displayName || "",
+      profileImage: photoURL || "",
+      level: 0,
+    };
+    setUser(newGamer);
+  };
+
+  useEffect(() => {
+    checkAuthState(getUserInfo);
+  }, []);
 
   return (
     <div>
