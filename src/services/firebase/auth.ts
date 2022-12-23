@@ -24,6 +24,9 @@ export const signup = ({ email, password, displayName }: AuthType) => {
       const user = userCredential.user;
       console.log(user);
       // ...
+      console.log(displayName);
+
+      displayName !== undefined && updateUserProfile(displayName);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -48,4 +51,22 @@ export const login = ({ email, password }: AuthType) => {
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
     });
+};
+
+export const updateUserProfile = (displayName: string) => {
+  auth.currentUser &&
+    updateProfile(auth.currentUser, {
+      displayName: displayName,
+      photoURL: "",
+    })
+      .then(() => {
+        console.log(auth.currentUser);
+        // Profile updated!
+        // ...
+      })
+      .catch((error) => {
+        console.log(error);
+        // An error occurred
+        // ...
+      });
 };
