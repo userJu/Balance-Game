@@ -47,6 +47,10 @@ const Signup = () => {
       email: email.value,
       password: password.value,
     };
+
+    await signup(authInfo);
+    await updateUserProfile(userName.value);
+    await addNewUserOnStorage();
   };
 
   const addNewUserOnStorage = async () => {
