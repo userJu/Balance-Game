@@ -95,3 +95,7 @@ export const logout = () => {
       console.log("로그아웃에 실패했습니다");
     });
 };
+
+export const checkCurrentUser = async () => {
+  return await auth.currentUser;
+};
