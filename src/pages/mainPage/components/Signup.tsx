@@ -1,7 +1,14 @@
 import React from "react";
 import Input from "../../../components/Input";
 import UseInput from "../../../hooks/UseInput";
-import { signup } from "../../../services/firebase/auth";
+import UseMakingGamer from "../../../hooks/UseMakingGamer";
+import {
+  AuthType,
+  checkCurrentUser,
+  signup,
+  updateUserProfile,
+} from "../../../services/firebase/auth";
+import { setNewUser } from "../../../services/firebase/firestore";
 
 const Signup = () => {
   const email = UseInput("");
@@ -32,17 +39,30 @@ const Signup = () => {
     handleChange: password.onChange,
   };
 
-  const onLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userName.value);
 
     const authInfo = {
       displayName: userName.value,
       email: email.value,
       password: password.value,
     };
+  };
 
-    signup(authInfo);
+  const addNewUserOnStorage = async () => {
+    const user = await checkCurrentUser();
+    console.log(user);
+    if (user) {
+      const { displayName, email, uid, photoURL } = user;
+      console.log(displayName, email, uid, photoURL);
+      const newGamer = UseMakingGamer({
+        id: email || "",
+        profileName: displayName || "",
+        profileImage: photoURL || "",
+      });
+      console.log(uid, newGamer);
+      setNewUser(uid, newGamer);
+    }
   };
 
   return (
