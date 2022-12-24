@@ -9,24 +9,22 @@ import {
   User,
 } from "firebase/auth";
 import { auth } from "./initializer";
-interface AuthType {
+export interface AuthType {
   displayName?: string;
   email: string;
   password: string;
 }
 
-export const signup = ({ email, password, displayName }: AuthType) => {
+export const signup = async ({ email, password, displayName }: AuthType) => {
   setPersistence(auth, browserSessionPersistence);
 
-  createUserWithEmailAndPassword(auth, email, password)
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       console.log(user);
       // ...
       console.log(displayName);
-
-      displayName !== undefined && updateUserProfile(displayName);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -53,9 +51,9 @@ export const login = ({ email, password }: AuthType) => {
     });
 };
 
-export const updateUserProfile = (displayName: string) => {
+export const updateUserProfile = async (displayName: string) => {
   auth.currentUser &&
-    updateProfile(auth.currentUser, {
+    (await updateProfile(auth.currentUser, {
       displayName: displayName,
       photoURL: "",
     })
@@ -68,7 +66,7 @@ export const updateUserProfile = (displayName: string) => {
         console.log(error);
         // An error occurred
         // ...
-      });
+      }));
 };
 
 export const checkAuthState = (getUserInfo: (user: User) => void) => {
@@ -96,4 +94,8 @@ export const logout = () => {
     .catch((error) => {
       console.log("로그아웃에 실패했습니다");
     });
+};
+
+export const checkCurrentUser = async () => {
+  return await auth.currentUser;
 };
