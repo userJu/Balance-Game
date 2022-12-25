@@ -2,24 +2,28 @@
 
 <br/>
 
-## 🎬 화면 설계 목록
+## ❄ 12/25 과제
 
 <br/>
 
-### Select Game Room
+- [ ] services
 
-<br/>
+  - [ ] topics collection 추가하기
 
-- [] **사용자 프로필**
+- [ ] mainpage
 
-  - [] 사용자 이름 출력
-  - [] 사용자 레벨 출력
+  - [ ] 로그인한 사용자 이름 / 레벨 / 이미지 불러오기
 
-- [] **게임 방 리스트**
+  - 방 만들기 버튼 클릭 시
+    - [ ] topics 선택
+    - [ ] 제목 작성
+  - 바로 시작 버튼 -> 후순위로 미루기
 
-  - [] 게임 방 출력
-  - [] 방 만들기 버튼
-  - [] 바로 시작하기 버튼
+  - 방 클릭시
+    - [ ] firestore collection games 내부 memebers에 user 추가
+    - [ ] waitGamePage로 이동
 
-- [] **유저 랭킹**
-  - [] 유저 랭킹 출력
+- [ ] waitGamePage
+  - [ ] members 배열을 돌면서 게임 내부 유저 추가.
+  - [ ] gameList object에 readyUser 배열 추가하기
+- [ ] 모든 유저가 ready되었을 경우 playingGamePage로 이동
