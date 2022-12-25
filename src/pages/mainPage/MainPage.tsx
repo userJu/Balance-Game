@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Container from "../../components/Container";
 import { Gamer } from "../../entities/gamer";
 import { checkAuthState } from "../../services/firebase/auth";
+import { getUserObject } from "../../services/firebase/firestore";
 import Auth from "./components/Auth";
 import GameListGrid from "./components/GameListGrid";
 import Lanking from "./components/Lanking";
@@ -18,23 +19,26 @@ const PageContainer = styled.div`
 const MainPage = () => {
   const [user, setUser] = useState<null | Gamer>(null);
 
-  const getUserInfo = (user: User) => {
-    const { email, displayName, photoURL } = user;
-    const newGamer = {
-      id: email || "",
-      profileName: displayName || "",
-      profileImage: photoURL || "",
-      level: 0,
+  const getUserInfo = async () =>
+    // user: User
+    {
+      const user = await checkAuthState();
+      if (user !== null) {
+        // 한 번 더 보자!! We used bracket notation instead of dot notation, which solved the error.
+        const userObject = await getUserObject(user["uid"]);
+        setUser(userObject);
+        return;
+      }
+      setUser(null);
     };
-    setUser(newGamer);
-  };
 
   const setUserLogout = () => {
     setUser((prev) => null);
   };
 
   useEffect(() => {
-    checkAuthState(getUserInfo);
+    // console.log(checkAuthState(getUserInfo));
+    getUserInfo();
   }, []);
 
   return (
@@ -43,7 +47,7 @@ const MainPage = () => {
       <PageContainer>
         <Container basis={"15%"}>
           {user !== null ? (
-            <UserInfo setUserLogout={setUserLogout}></UserInfo>
+            <UserInfo setUserLogout={setUserLogout} user={user}></UserInfo>
           ) : (
             <Auth></Auth>
           )}
