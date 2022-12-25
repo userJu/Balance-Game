@@ -69,22 +69,28 @@ export const updateUserProfile = async (displayName: string) => {
       }));
 };
 
-export const checkAuthState = (getUserInfo: (user: User) => void) => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log(user);
-      getUserInfo(user);
-      // ...
-    } else {
-      console.log("유저 없음");
-      // User is signed out
-      // ...
-    }
-  });
-};
+export const checkAuthState = async () =>
+  // getUserInfo: (user: User) => void
+  {
+    let currentUser = null;
+    await onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        console.log(user);
+        // getUserInfo(user);
+        // ...
+        currentUser = user;
+      } else {
+        console.log("유저 없음");
+        // User is signed out
+        // ...
+      }
+    });
+
+    return currentUser;
+  };
 
 export const logout = () => {
   signOut(auth)
