@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { FIRESTORE_COLLECTIONS } from "../../constants/firestore";
 import { Gamer } from "../../entities/gamer";
 import { db } from "./initializer";
@@ -20,4 +20,9 @@ export const getUserObject = async (uid: string) => {
     console.log("No such document!");
     return null;
   }
+};
+
+export const getAllDocsOnCollections = async (collecionName: string) => {
+  const querySnapshot = await getDocs(collection(db, collecionName));
+  return querySnapshot;
 };
