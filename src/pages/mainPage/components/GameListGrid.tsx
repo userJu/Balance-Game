@@ -15,7 +15,7 @@ const GameListGrid = () => {
   return (
     <GridContainer>
       {gameList.map((game) => (
-        <GameCard key={game.gameId} game={game} />
+        <GameCard key={String(game.gameId)} game={game} />
       ))}
     </GridContainer>
   );

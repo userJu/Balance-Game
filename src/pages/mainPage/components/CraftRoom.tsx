@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CheckboxInput from "../../../components/CheckboxInput";
 import Input from "../../../components/Input";
 import { FIRESTORE_COLLECTIONS } from "../../../constants/firestore";
+import { Gamer } from "../../../entities/gamer";
 import { Topic } from "../../../entities/topics";
 import UseInput from "../../../hooks/UseInput";
-import { getAllDocsOnCollections } from "../../../services/firebase/firestore";
+import UseRemoveItem from "../../../hooks/UseRemoveItem";
+import { WAIT_GAME_PAGE } from "../../../router/routePath";
+import {
+  getAllDocsOnCollections,
+  setNewGame,
+} from "../../../services/firebase/firestore";
 
-const CraftRoom = () => {
+interface CraftRoomProps {
+  user: Gamer;
+}
+
+const CraftRoom = ({ user }: CraftRoomProps) => {
+  const navigate = useNavigate();
+
   const [topics, setTopics] = useState<Topic[]>([]);
+  const [checkedTopics, setCheckedTopics] = useState<string[]>([]);
   const gameTitle = UseInput("");
 
   const gameTitleInput = {
@@ -20,32 +34,57 @@ const CraftRoom = () => {
 
   const handleCraftNewRoom = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // validation 진행하기
+    console.log(gameTitle.value, checkedTopics);
+    const newGame = {
+      gameId: new Date(),
+      title: gameTitle.value,
+      topic: checkedTopics,
+      max_members: 8,
+      members: [user],
+    };
+    setNewGame(newGame);
+    navigate(WAIT_GAME_PAGE);
   };
 
-  const getTopics = async () => {
+  const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    const { name, checked } = e.currentTarget;
+    console.log(name, checked);
+    if (checked) {
+      setCheckedTopics((prev) => [...prev, name]);
+    } else {
+      const removedArray = UseRemoveItem({
+        array: checkedTopics,
+        target: name,
+      });
+      setCheckedTopics((prev) => [...removedArray]);
+    }
+  };
+
+  const makeTopicsArray = async () => {
     const topicArray: Topic[] = [];
 
     (await getAllDocsOnCollections(FIRESTORE_COLLECTIONS.topics)).forEach(
-      (doc) => {
-        const topic = doc.data();
-        console.log(topic);
-        topicArray.push(topic);
-      }
+      (doc) => topicArray.push(doc.data())
     );
 
     setTopics((prev) => [...topicArray]);
   };
 
   useEffect(() => {
-    getTopics();
+    makeTopicsArray();
   }, []);
 
   return (
     <form action="submit" onSubmit={handleCraftNewRoom}>
-      <CheckboxInput></CheckboxInput>
+      <CheckboxInput
+        topics={topics}
+        handleCheckboxClick={handleCheckboxClick}
+      ></CheckboxInput>
+      <p>{checkedTopics}</p>
 
       <Input {...gameTitleInput}></Input>
-      <button>방 만들기</button>
+      <button>새로운 방으로 들어가기</button>
     </form>
   );
 };
