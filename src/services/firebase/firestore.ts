@@ -15,12 +15,11 @@ import { Topic } from "../../entities/topics";
 import { Game } from "../../entities/game";
 
 export const setNewUser = async (uid: string, gamer: Gamer) => {
-  console.log(uid, gamer);
   await setDoc(doc(db, FIRESTORE_COLLECTIONS.users, uid), gamer);
 };
 
 export const getUserObject = async (uid: string) => {
-  const docRef = doc(db, "users", uid);
+  const docRef = doc(db, FIRESTORE_COLLECTIONS.users, uid);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
