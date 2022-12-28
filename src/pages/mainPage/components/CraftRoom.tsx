@@ -32,6 +32,21 @@ const CraftRoom = ({ user }: CraftRoomProps) => {
     handleChange: gameTitle.onChange,
   };
 
+  const handleCraftNewRoom = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // validation 진행하기
+    console.log(gameTitle.value, checkedTopics);
+    const newGame = {
+      gameId: new Date(),
+      title: gameTitle.value,
+      topic: checkedTopics,
+      max_members: 8,
+      members: [user],
+    };
+    setNewGame(newGame);
+    navigate(WAIT_GAME_PAGE);
+  };
+
   const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
     console.log(name, checked);
@@ -61,7 +76,7 @@ const CraftRoom = ({ user }: CraftRoomProps) => {
   }, []);
 
   return (
-    <form action="submit">
+    <form action="submit" onSubmit={handleCraftNewRoom}>
       <CheckboxInput
         topics={topics}
         handleCheckboxClick={handleCheckboxClick}
