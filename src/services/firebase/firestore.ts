@@ -1,15 +1,25 @@
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { topics } from "./../mock/topics";
+import {
+  addDoc,
+  collection,
+  CollectionReference,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import { FIRESTORE_COLLECTIONS } from "../../constants/firestore";
 import { Gamer } from "../../entities/gamer";
 import { db } from "./initializer";
+import { Topic } from "../../entities/topics";
+import { Game } from "../../entities/game";
 
 export const setNewUser = async (uid: string, gamer: Gamer) => {
-  console.log(uid, gamer);
   await setDoc(doc(db, FIRESTORE_COLLECTIONS.users, uid), gamer);
 };
 
 export const getUserObject = async (uid: string) => {
-  const docRef = doc(db, "users", uid);
+  const docRef = doc(db, FIRESTORE_COLLECTIONS.users, uid);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
@@ -22,7 +32,17 @@ export const getUserObject = async (uid: string) => {
   }
 };
 
+export const setNewTopic = async (topicName: string, topic: Topic) => {
+  await setDoc(doc(db, FIRESTORE_COLLECTIONS.topics, topicName), topic);
+};
+
+export const setNewGame = async (topicName: string, game: Game) => {
+  await addDoc(collection(db, FIRESTORE_COLLECTIONS.games), game);
+};
+
 export const getAllDocsOnCollections = async (collecionName: string) => {
-  const querySnapshot = await getDocs(collection(db, collecionName));
+  const querySnapshot = await getDocs(
+    collection(db, collecionName) as CollectionReference<Topic>
+  );
   return querySnapshot;
 };
