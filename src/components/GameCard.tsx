@@ -39,8 +39,7 @@ interface GameCardProps {
 
 const GameCard = ({ game }: GameCardProps) => {
   const navigate = useNavigate();
-  const { gameId, title, owner, topic, max_members, members, createDate } =
-    game;
+  const { gameId, title, topic, max_members, members } = game;
 
   console.log(topics[3]);
   const interGame = () => {
@@ -51,9 +50,7 @@ const GameCard = ({ game }: GameCardProps) => {
     <Container onClick={interGame}>
       <div>💛</div>
       <GameInfo>
-        {topic.map((item) => (
-          <GameTag key={item}>{topics[item].title}</GameTag>
-        ))}
+        <GameTag key={topic.join("")}>{topic.join(", ")}</GameTag>
         <Title>{title}</Title>
         <State>
           <p>waiting</p>
