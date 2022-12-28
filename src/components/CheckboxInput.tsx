@@ -1,10 +1,25 @@
 import React from "react";
+import { Topic } from "../entities/topics";
 
-const CheckboxInput = () => {
+interface CheckboxInputProps {
+  topics: Topic[];
+  handleCheckboxClick: (e: React.MouseEvent<HTMLInputElement>) => void;
+}
+
+const CheckboxInput = ({ topics, handleCheckboxClick }: CheckboxInputProps) => {
   return (
     <div>
-      <input type="checkbox" name="하나" id="하나" />
-      <label htmlFor="하나">하나</label>
+      {topics.map((topic) => (
+        <>
+          <input
+            type="checkbox"
+            name={topic.title}
+            id={topic.title}
+            onClick={handleCheckboxClick}
+          />
+          <label htmlFor={topic.title}>{topic.title}</label>
+        </>
+      ))}
     </div>
   );
 };
