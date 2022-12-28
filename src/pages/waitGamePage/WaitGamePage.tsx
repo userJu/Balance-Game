@@ -51,8 +51,8 @@ const WaitGamePage = () => {
       <PageContainer>
         <Container basis={"65%"}>
           <div>
-            <h3>{title}</h3>
-            <UserGrid members={members}></UserGrid>
+            {/* <h3>{title}</h3> */}
+            {/* <UserGrid members={members}></UserGrid> */}
           </div>
           <Form handleFormSubmit={submitChat}>
             <Input {...chatInputProps}></Input>
