@@ -32,6 +32,10 @@ export const getUserObject = async (uid: string) => {
   }
 };
 
+export const setNewTopic = async (topicName: string, topic: Topic) => {
+  await setDoc(doc(db, FIRESTORE_COLLECTIONS.topics, topicName), topic);
+};
+
 export const getAllDocsOnCollections = async (collecionName: string) => {
   const querySnapshot = await getDocs(
     collection(db, collecionName) as CollectionReference<Topic>
