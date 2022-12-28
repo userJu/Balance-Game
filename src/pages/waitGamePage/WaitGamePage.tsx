@@ -15,9 +15,9 @@ const PageContainer = styled.div`
 `;
 
 const WaitGamePage = () => {
-  const location = useLocation();
-  const { gameId, title, owner, topic, max_members, members, createDate } =
-    location.state.gameInfo;
+  // const location = useLocation();
+  // const { gameId, title, owner, topic, max_members, members, createDate } =
+  //   location.state.gameInfo;
 
   const chatInput = UseInput("");
   const suggestInput = UseInput("");
