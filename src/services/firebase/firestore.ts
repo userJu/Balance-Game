@@ -1,7 +1,18 @@
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { topics } from "./../mock/topics";
+import {
+  addDoc,
+  collection,
+  CollectionReference,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import { FIRESTORE_COLLECTIONS } from "../../constants/firestore";
 import { Gamer } from "../../entities/gamer";
 import { db } from "./initializer";
+import { Topic } from "../../entities/topics";
+import { Game } from "../../entities/game";
 
 export const setNewUser = async (uid: string, gamer: Gamer) => {
   console.log(uid, gamer);
@@ -23,6 +34,8 @@ export const getUserObject = async (uid: string) => {
 };
 
 export const getAllDocsOnCollections = async (collecionName: string) => {
-  const querySnapshot = await getDocs(collection(db, collecionName));
+  const querySnapshot = await getDocs(
+    collection(db, collecionName) as CollectionReference<Topic>
+  );
   return querySnapshot;
 };
