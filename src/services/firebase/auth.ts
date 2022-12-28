@@ -69,28 +69,17 @@ export const updateUserProfile = async (displayName: string) => {
       }));
 };
 
-export const checkAuthState = async () =>
-  // getUserInfo: (user: User) => void
-  {
-    let currentUser = null;
-    await onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(user);
-        // getUserInfo(user);
-        // ...
-        currentUser = user;
-      } else {
-        console.log("유저 없음");
-        // User is signed out
-        // ...
-      }
-    });
-
-    return currentUser;
-  };
+export const checkAuthState = async (currentUser: (user: User) => void) => {
+  await onAuthStateChanged(auth, (user) => {
+    console.log(user);
+    if (user) {
+      console.log(user);
+      currentUser(user);
+    } else {
+      console.log("유저 없음");
+    }
+  });
+};
 
 export const logout = () => {
   signOut(auth)
