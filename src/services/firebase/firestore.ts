@@ -37,7 +37,11 @@ export const setNewTopic = async (topicName: string, topic: Topic) => {
 };
 
 export const setNewGame = async (game: Game) => {
-  await addDoc(collection(db, FIRESTORE_COLLECTIONS.games), game);
+  const docRef = await addDoc(
+    collection(db, FIRESTORE_COLLECTIONS.games),
+    game
+  );
+  return docRef.id;
 };
 
 export const getAllDocsOnCollections = async (collecionName: string) => {
