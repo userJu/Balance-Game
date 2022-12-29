@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CheckboxInput from "../../../components/CheckboxInput";
 import Input from "../../../components/Input";
 import { FIRESTORE_COLLECTIONS } from "../../../constants/firestore";
+import { Game } from "../../../entities/game";
 import { Gamer } from "../../../entities/gamer";
 import { Topic } from "../../../entities/topics";
 import UseInput from "../../../hooks/UseInput";
@@ -43,8 +44,14 @@ const CraftRoom = ({ user }: CraftRoomProps) => {
       max_members: 8,
       members: [user],
     };
-    setNewGame(newGame);
-    navigate(WAIT_GAME_PAGE);
+
+    navigateWithFireStoreRef(newGame);
+  };
+
+  const navigateWithFireStoreRef = async (newGame: Game) => {
+    const docRef = await setNewGame(newGame);
+    console.log(docRef);
+    navigate(`${WAIT_GAME_PAGE}/${docRef}`);
   };
 
   const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
