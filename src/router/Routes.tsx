@@ -10,8 +10,8 @@ const Routes = () => {
   return (
     <ReactRouterRoutes>
       <Route path={MAIN_PAGE} element={<MainPage />} />
-      <Route path={WAIT_GAME_PAGE} element={<WaitGamePage />} />
-      <Route path={PLAYING_GAME_PAGE} element={<PlayingGamePage />} />
+      <Route path={`${WAIT_GAME_PAGE}/:id`} element={<WaitGamePage />} />
+      <Route path={`${PLAYING_GAME_PAGE}/:id`} element={<PlayingGamePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </ReactRouterRoutes>
   );
