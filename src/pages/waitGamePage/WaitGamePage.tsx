@@ -9,15 +9,16 @@ import Form from "./components/Form";
 import UserGrid from "./components/UserGrid";
 import Container from "../../components/Container";
 import styled from "styled-components";
+import UseGetLastPathname from "../../hooks/UseGetLastPathname";
 
 const PageContainer = styled.div`
   display: flex;
 `;
 
 const WaitGamePage = () => {
-  // const location = useLocation();
-  // const { gameId, title, owner, topic, max_members, members, createDate } =
-  //   location.state.gameInfo;
+  const location = useLocation();
+  console.log(location);
+  UseGetLastPathname(location.pathname);
 
   const chatInput = UseInput("");
   const suggestInput = UseInput("");
