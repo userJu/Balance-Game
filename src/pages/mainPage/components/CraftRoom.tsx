@@ -36,7 +36,6 @@ const CraftRoom = ({ user }: CraftRoomProps) => {
   const handleCraftNewRoom = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // validation 진행하기
-    console.log(gameTitle.value, checkedTopics);
     const newGame = {
       gameId: new Date(),
       title: gameTitle.value,
@@ -50,13 +49,11 @@ const CraftRoom = ({ user }: CraftRoomProps) => {
 
   const navigateWithFireStoreRef = async (newGame: Game) => {
     const docRef = await setNewGame(newGame);
-    console.log(docRef);
     navigate(`${WAIT_GAME_PAGE}/${docRef}`);
   };
 
   const handleCheckboxClick = (e: React.MouseEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
-    console.log(name, checked);
     if (checked) {
       setCheckedTopics((prev) => [...prev, name]);
     } else {

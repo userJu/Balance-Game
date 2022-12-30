@@ -17,7 +17,6 @@ const PageContainer = styled.div`
 
 const WaitGamePage = () => {
   const location = useLocation();
-  console.log(location);
   UseGetLastPathname(location.pathname);
 
   const chatInput = UseInput("");
@@ -41,7 +40,6 @@ const WaitGamePage = () => {
 
   const submitChat = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(chatInput.value);
   };
   const submitSuggests = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -27,7 +27,6 @@ const MainPage = () => {
 
   const getUserInfo = async () => {
     const user = await checkAuthState(currentUser);
-    console.log(user);
   };
 
   const setUserLogout = () => {
@@ -35,7 +34,6 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    // console.log(checkAuthState(getUserInfo));
     getUserInfo();
   }, []);
 

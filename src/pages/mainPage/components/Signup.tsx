@@ -55,16 +55,13 @@ const Signup = () => {
 
   const addNewUserOnStorage = async () => {
     const user = await checkCurrentUser();
-    console.log(user);
     if (user) {
       const { displayName, email, uid, photoURL } = user;
-      console.log(displayName, email, uid, photoURL);
       const newGamer = UseMakingGamer({
         id: email || "",
         profileName: displayName || "",
         profileImage: photoURL || "",
       });
-      console.log(uid, newGamer);
       setNewUser(uid, newGamer);
     }
   };

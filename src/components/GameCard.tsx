@@ -41,7 +41,6 @@ const GameCard = ({ game }: GameCardProps) => {
   const navigate = useNavigate();
   const { gameId, title, topic, max_members, members } = game;
 
-  console.log(topics[3]);
   const interGame = () => {
     navigate(WAIT_GAME_PAGE, { state: { gameInfo: game } });
     return;
