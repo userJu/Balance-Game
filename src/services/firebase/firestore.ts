@@ -50,3 +50,16 @@ export const getAllDocsOnCollections = async (collecionName: string) => {
   );
   return querySnapshot;
 };
+
+export const getSpecificGameDocs = async (docsId: string) => {
+  const docRef = doc(db, FIRESTORE_COLLECTIONS.games, docsId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return docSnap.data();
+};
