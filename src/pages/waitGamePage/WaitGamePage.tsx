@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Gamer } from "../../entities/gamer";
 import BigButton from "../../components/BigButton";
@@ -10,14 +10,32 @@ import UserGrid from "./components/UserGrid";
 import Container from "../../components/Container";
 import styled from "styled-components";
 import UseGetLastPathname from "../../hooks/UseGetLastPathname";
+import { getSpecificGameDocs } from "../../services/firebase/firestore";
+import { Game } from "../../entities/game";
+import { DocumentData } from "firebase/firestore";
 
 const PageContainer = styled.div`
   display: flex;
 `;
 
 const WaitGamePage = () => {
+  const [game, setGame] = useState<Game>();
   const location = useLocation();
-  UseGetLastPathname(location.pathname);
+  const gameDocsId = UseGetLastPathname(location.pathname) ?? "";
+
+  const gameData = async () => {
+    const gameDocs = (await getSpecificGameDocs(gameDocsId)) ?? {};
+    console.log(gameDocs);
+    console.log(typeof gameDocs.gameId);
+
+    setGame(gameDocs);
+  };
+
+  useEffect(() => {
+    gameData();
+  }, []);
+
+  // const { gameId, max_memebers, members, title, topic } = gameData();
 
   const chatInput = UseInput("");
   const suggestInput = UseInput("");
@@ -50,8 +68,8 @@ const WaitGamePage = () => {
       <PageContainer>
         <Container basis={"65%"}>
           <div>
-            {/* <h3>{title}</h3> */}
-            {/* <UserGrid members={members}></UserGrid> */}
+            <h3>{game?.title}</h3>
+            {game && <UserGrid members={game?.members}></UserGrid>}
           </div>
           <Form handleFormSubmit={submitChat}>
             <Input {...chatInputProps}></Input>
