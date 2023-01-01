@@ -61,5 +61,5 @@ export const getSpecificGameDocs = async (docsId: string) => {
     // doc.data() will be undefined in this case
     console.log("No such document!");
   }
-  return docSnap.data();
+  return docSnap.data() as Game;
 };
