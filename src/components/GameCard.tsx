@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Game } from "../entities/game";
+import { Game, GameWithDocsRef } from "../entities/game";
 import { PLAYING_GAME_PAGE, WAIT_GAME_PAGE } from "../router/routePath";
 import { topics } from "../services/mock/topics";
 import { colors } from "../style/styles";
@@ -34,15 +34,27 @@ const State = styled.div`
 `;
 
 interface GameCardProps {
-  game: Game;
+  game: GameWithDocsRef;
 }
 
 const GameCard = ({ game }: GameCardProps) => {
   const navigate = useNavigate();
-  const { gameId, title, topic, max_members, members } = game;
+  const { docRef, gameId, title, topic, max_members, members } = game;
 
   const interGame = () => {
-    navigate(WAIT_GAME_PAGE, { state: { gameInfo: game } });
+    const newGame = {
+      docRef,
+      gameId,
+      title,
+      topic,
+      max_members,
+      members,
+    };
+
+    console.log(newGame);
+
+    navigate(`${WAIT_GAME_PAGE}/${docRef}`);
+
     return;
   };
   return (
