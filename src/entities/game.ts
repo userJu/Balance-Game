@@ -7,3 +7,7 @@ export interface Game {
   max_members: number;
   members: Gamer[];
 }
+
+export interface GameWithDocsRef extends Game {
+  docRef?: string;
+}
