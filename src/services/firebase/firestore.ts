@@ -51,6 +51,13 @@ export const getAllDocsOnCollections = async (collecionName: string) => {
   return querySnapshot;
 };
 
+export const getAllDocsOnGames = async () => {
+  const querySnapshot = await getDocs(
+    collection(db, FIRESTORE_COLLECTIONS.games) as CollectionReference<Game>
+  );
+  return querySnapshot;
+};
+
 export const getSpecificGameDocs = async (docsId: string) => {
   const docRef = doc(db, FIRESTORE_COLLECTIONS.games, docsId);
   const docSnap = await getDoc(docRef);
